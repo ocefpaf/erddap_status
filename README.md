@@ -2,7 +2,7 @@
 
 Check the status of some ERDDAP servers
 
-  ![IOOS](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/ocefpaf/erddap_status-status/main/status_ioos.json)
+  ![IOOS](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/ocefpaf/erddap_status/main/status_ioos.json)
 
-  ![GLIDER](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/ocefpaf/erddap_status-status/main/status_glider.json)
+  ![GLIDER](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/ocefpaf/erddap_status/main/status_glider.json)
   
