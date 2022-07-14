@@ -1,0 +1,52 @@
+name: erddap-status
+
+on:
+  schedule:
+    - cron:  '*/5 * * * *'
+  push:
+    branches: [ main ]
+
+jobs:
+  check-and-report:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        ref: 'main'
+  
+    - uses: actions/checkout@v3
+    - name: Save report
+      run: date +%s > last_update.txt
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install erddapy
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install erddapy
+
+    - name: Check API status
+      run: |
+        python check_save_status.py
+
+    - name: Save API status online
+      uses: EndBug/add-and-commit@v9
+      with:
+        message: "Update status files"
+        default_author: github_actions
+        add: "*.json --force"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Save report online
+      uses: EndBug/add-and-commit@v9
+      with:
+        message: "Update report file"
+        default_author: github_actions
+        add: "*.txt --force"
